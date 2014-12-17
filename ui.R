@@ -1,6 +1,11 @@
 library(shiny)
 
 shinyUI(fluidPage(
+
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "style.css")
+  ),
+
   titlePanel("Welcome to twANOVA!"),
 
   # Sidebar with a controls panel and a main panel with output

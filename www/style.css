@@ -1,0 +1,12 @@
+.custom td {
+   width: 40px;
+   text-align: center;
+}
+
+.custom th {
+   width: 40px;
+}
+
+.result th {
+    text-align: left;
+}

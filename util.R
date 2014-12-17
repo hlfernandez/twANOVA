@@ -3,13 +3,13 @@ appendText <- function(text, toAppend) {
 }
 
 dataFrameToHTML <- function(data) {
-  html <- "<table><tr>"
+  html <- "<table class=\"custom\"><tr><td>&nbsp;</td>"
   for(col in 1:ncol(data)){
     html <- appendText(html, "<th>")
     html <- appendText(html, as.character(data[1,col]))
     html <- appendText(html, "</th>")
   }
-  html <- appendText(html, "</tr><tr>")
+  html <- appendText(html, "</tr><tr><td>&nbsp;</td>")
   for(col in 1:ncol(data)){  
     html <- appendText(html, "<th>")
     html <- appendText(html, as.character(data[2,col]))
@@ -17,7 +17,7 @@ dataFrameToHTML <- function(data) {
   }
   html <- appendText(html, "</tr>")
   for(row in 3:nrow(data)) {
-    html <- appendText(html, "<tr>")
+    html <- appendText(html, "<tr><td>&nbsp;</td>")
     for(col in 1:ncol(data)){
       html <- appendText(html, "<td>")
       html <- appendText(html, as.character(data[row,col]))
@@ -25,6 +25,14 @@ dataFrameToHTML <- function(data) {
     }
     html <- appendText(html, "</tr>")
   }
+  html <- appendText(html, "<tr><th>Sum</th>")
+    for(col in 1:ncol(data)){
+      html <- appendText(html, "<th>")
+      html <- appendText(html, sum(as.numeric(as.character(data[3:nrow(data),col]))))
+      html <- appendText(html, "</th>")
+    }
+  html <- appendText(html, "</tr>")
+  
   html <- appendText(html, "</table>")
   html
 }
@@ -32,30 +40,30 @@ dataFrameToHTML <- function(data) {
 ABMatrixToHTML <- function(aFactor, bFactor, simpleEffects){
   factorAlevels <- aFactor@levels
   factorBlevels <- bFactor@levels
-  html <- "<table><tr><td>&nbsp;</td>"
+  html <- "<table class=\"custom\"><tr><td>&nbsp;</td>"
   for(factorAIndex in 1:length(factorAlevels)) {
-    html <- appendText(html, paste("<td>",factorAlevels[factorAIndex],"</td>", sep=""))
+    html <- appendText(html, paste("<th>",factorAlevels[factorAIndex],"</th>", sep=""))
   }
-  html <- appendText(html, paste("<td>B</td>", sep=""))
+  html <- appendText(html, paste("<th>B</th>", sep=""))
   html <- appendText(html, "</tr>")
   for(factorBIndex in 1:length(factorBlevels)) {
     html <- appendText(html, "<tr>")
     factorBName <- factorBlevels[factorBIndex]
-    html <- appendText(html, paste("<td>",factorBName,"</td>", sep=""))
+    html <- appendText(html, paste("<th>",factorBName,"</th>", sep=""))
     for(s in 1:length(simpleEffects)){
       simpleEffect <- simpleEffects[[s]]
       if(simpleEffect@factorB == factorBName){
 	html <- appendText(html, paste("<td>",simpleEffect@AB,"</td>", sep=""))
       }
     }
-    html <- appendText(html, paste("<td>",bFactor@marginalSums[factorBIndex],"</td>", sep=""))
+    html <- appendText(html, paste("<th>",bFactor@marginalSums[factorBIndex],"</th>", sep=""))
     html <- appendText(html, "</tr>")
   } 
-  html <- appendText(html, "<tr><td>A</td>")
+  html <- appendText(html, "<tr><th>A</th>")
   for(factorAIndex in 1:length(factorAlevels)) {
-    html <- appendText(html, paste("<td>",aFactor@marginalSums[factorAIndex],"</td>", sep=""))
+    html <- appendText(html, paste("<th>",aFactor@marginalSums[factorAIndex],"</th>", sep=""))
   }
-  html <- appendText(html, paste("<td>",aFactor@sum,"</td>", sep=""))
+  html <- appendText(html, paste("<th>",aFactor@sum,"</th>", sep=""))
   html <- appendText(html, "</tr></table>")
   html
 } 
@@ -70,8 +78,8 @@ basicCoefficientsToHTML <- function(partials) {
 }
 
 twAnovaInteractionResultToHTML <- function(object) {
-    html <- "<table width=\"100%\"><tr>"
-    html <- appendText(html, "<td>S.V</td><td>Sum Sq</td><td>Df</td><td>Mean Sq</td><td>F value</td><td>Pr(>f)</td></tr>")
+    html <- "<table width=\"100%\" class=\"result\"><tr>"
+    html <- appendText(html, "<th>S.V</th><th>Sum Sq</th><th>Df</th><th>Mean Sq</th><th>F value</th><th>Pr(>f)</th></tr>")
     html <- appendText(html, paste("<tr><td>A</td><td>",round(object@SCa,2),"</td><td>",object@DFa,"</td><td>",		round(object@MCa,2),"</td><td>",round(object@Fa,4),"</td><td>",	round(object@pa,6),significanceCode(object@pa),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>B</td><td>",round(object@SCb,2),"</td><td>",		object@DFb,"</td><td>",	round(object@MCb,2),"</td><td>",round(object@Fb,4),"</td><td>",	round(object@pb,6),significanceCode(object@pb),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>AxB</td><td>",round(object@SCab,2),"</td><td>",		object@DFab,"</td><td>",	round(object@MCab,2),"</td><td>",	round(object@Fab,4),"</td><td>",	round(object@pab,6),significanceCode(object@pab),"</td></tr>"))
@@ -81,8 +89,8 @@ twAnovaInteractionResultToHTML <- function(object) {
 }
 
 twAnovaWithoutInteractionResultToHTML <- function(object) {
-    html <- "<table width=\"100%\"><tr>"
-    html <- appendText(html, "<td>S.V</td><td>Sum Sq</td><td>Df</td><td>Mean Sq</td><td>F value</td><td>Pr(>f)</td></tr>")
+    html <- "<table width=\"100%\" class=\"result\"><tr>"
+    html <- appendText(html, "<th>S.V</th><th>Sum Sq</th><th>Df</th><th>Mean Sq</th><th>F value</th><th>Pr(>f)</th></tr>")
     html <- appendText(html, paste("<tr><td>A</td><td>",round(object@SCa,2),"</td><td>",object@DFa,"</td><td>",		round(object@MCa,2),"</td><td>",round(object@Fa,4),"</td><td>",	round(object@pa,6),significanceCode(object@pa),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>B</td><td>",round(object@SCb,2),"</td><td>",		object@DFb,"</td><td>",	round(object@MCb,2),"</td><td>",round(object@Fb,4),"</td><td>",	round(object@pb,6),significanceCode(object@pb),"</td></tr>"))   
     html <- appendText(html, paste("<tr><td>S/AxB</td><td>",	round(object@SCsab,2),"</td><td>",object@DFsab,"</td><td>",	round(object@MCsab,2),"</td></tr>"))
