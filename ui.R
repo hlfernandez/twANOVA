@@ -38,7 +38,8 @@ shinyUI(fluidPage(
       
     mainPanel(
       tabsetPanel(
-	tabPanel("Two-way ANOVA", htmlOutput("result"))
+	tabPanel("Two-way ANOVA", htmlOutput("result")),
+	tabPanel("Plots", plotOutput("plots"))      
      )
     )
   )

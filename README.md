@@ -25,7 +25,8 @@ runApp("./")
 
 The application is opened in the default web browser.
 
-![Screenshot](https://raw.github.com/hlfernandez/twANOVA/master/screenshots/screenshot.png)
+![Screenshot 1: results](https://raw.github.com/hlfernandez/twANOVA/master/screenshots/screenshot1.png)
+![Screenshot 2: plots](https://raw.github.com/hlfernandez/twANOVA/master/screenshots/screenshot2.png)
 
 Tests
 ------------
