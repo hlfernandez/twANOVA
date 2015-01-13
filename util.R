@@ -84,7 +84,7 @@ twAnovaInteractionResultToHTML <- function(object) {
     html <- appendText(html, paste("<tr><td>B</td><td>",round(object@SCb,2),"</td><td>",		object@DFb,"</td><td>",	round(object@MCb,2),"</td><td>",round(object@Fb,4),"</td><td>",	round(object@pb,6),significanceCode(object@pb),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>AxB</td><td>",round(object@SCab,2),"</td><td>",		object@DFab,"</td><td>",	round(object@MCab,2),"</td><td>",	round(object@Fab,4),"</td><td>",	round(object@pab,6),significanceCode(object@pab),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>S/AxB</td><td>",	round(object@SCsab,2),"</td><td>",object@DFsab,"</td><td>",	round(object@MCsab,2),"</td></tr>"))
-    html <- appendText(html, paste("<tr><td>Total</td><td>",round(object@SCsab,2),"</td><td>",object@DFt,"</td></tr>"))
+    html <- appendText(html, paste("<tr><td>Total</td><td>",round(object@SCt,2),"</td><td>",object@DFt,"</td></tr>"))
     html <- appendText(html, "</table>")
 }
 
@@ -94,7 +94,7 @@ twAnovaWithoutInteractionResultToHTML <- function(object) {
     html <- appendText(html, paste("<tr><td>A</td><td>",round(object@SCa,2),"</td><td>",object@DFa,"</td><td>",		round(object@MCa,2),"</td><td>",round(object@Fa,4),"</td><td>",	round(object@pa,6),significanceCode(object@pa),"</td></tr>"))
     html <- appendText(html, paste("<tr><td>B</td><td>",round(object@SCb,2),"</td><td>",		object@DFb,"</td><td>",	round(object@MCb,2),"</td><td>",round(object@Fb,4),"</td><td>",	round(object@pb,6),significanceCode(object@pb),"</td></tr>"))   
     html <- appendText(html, paste("<tr><td>S/AxB</td><td>",	round(object@SCsab,2),"</td><td>",object@DFsab,"</td><td>",	round(object@MCsab,2),"</td></tr>"))
-    html <- appendText(html, paste("<tr><td>Total</td><td>",round(object@SCsab,2),"</td><td>",object@DFt,"</td></tr>"))
+    html <- appendText(html, paste("<tr><td>Total</td><td>",round(object@SCt,2),"</td><td>",object@DFt,"</td></tr>"))
     html <- appendText(html, "</table>")
     html
 }

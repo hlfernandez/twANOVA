@@ -91,7 +91,7 @@ setMethod("show", "twAnovaInteractionResult",
     cat("B\t",	round(object@SCb,2),"\t",		object@DFb,"\t",	round(object@MCb,2),"\t",	round(object@Fb,4),"\t",	round(object@pb,6),significanceCode(object@pb),"\n")
     cat("AxB\t",round(object@SCab,2),"\t",		object@DFab,"\t",	round(object@MCab,2),"\t",	round(object@Fab,4),"\t",	round(object@pab,6),significanceCode(object@pab),"\n")
     cat("S/AxB\t",	round(object@SCsab,2),"\t",object@DFsab,"\t",	round(object@MCsab,2),"\n")
-    cat("Total\t",		round(object@SCsab,2),"\t",object@DFt,"\n")
+    cat("Total\t",		round(object@SCt,2),"\t",object@DFt,"\n")
     cat("\n")
   }
 )
@@ -207,7 +207,7 @@ twoWayAnova <- function(data) {
     for(factorBIndex in 1:length(factorBlevels)) {
       factorAName <- factorAlevels[factorAIndex]
       factorBName <- factorBlevels[factorBIndex]
-      observations <- as.numeric(unlist(data[seq(3,nrow(data)),(factorBIndex + length(factorAlevels) * (factorAIndex-1))]))
+      observations <- as.numeric(unlist(data[seq(3,nrow(data)),(factorBIndex + length(factorBlevels) * (factorAIndex-1))]))
       currentAB <- sum(observations)
       simpleEffects <- c(simpleEffects, 
 	simpleEffect(
