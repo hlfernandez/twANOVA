@@ -20,11 +20,7 @@ shinyServer(function(input, output) {
   });
   
   performAnova <- reactive({
-    if (is.null(input$file)) {
 	return (twoWayAnova(loadDataset()));
-    } else {
-      return (read.csv(input$file$datapath, header=FALSE, stringsAsFactors=FALSE));
-    }
   });
   
   output$result <- renderUI({         
